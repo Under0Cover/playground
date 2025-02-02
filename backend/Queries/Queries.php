@@ -15,7 +15,7 @@ class Queries {
     ";
 
     const CHECK_USER = "
-        SELECT ID, NAME, EMAIL, PASSWORD, PERMISSION
+        SELECT *
         FROM USERS
         WHERE EMAIL = :EMAIL;
     ";
@@ -33,6 +33,17 @@ class Queries {
 
     const UPDATE_TASK_STATUS = "
         UPDATE TODOS SET STATUS = 'C', COMPLETED_AT = NOW() WHERE ID = :ID
+    ";
+
+    const GET_USERS = "
+        SELECT *
+        FROM USERS;
+    ";
+
+    const GET_TASKS_FOR_ALL = "
+        SELECT *
+        FROM TODOS
+        WHERE USER_ID = :USER_ID;
     ";
 }
 

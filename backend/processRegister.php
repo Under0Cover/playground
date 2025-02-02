@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $params[':NAME'] = trim($_POST['name']);
     $params[':PHONE'] = trim($_POST['phone']);
     $params[':EMAIL'] = trim($_POST['email']);
-    $params[':PASSWORD'] = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
+    $params[':PASSWORD'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $params[':PERMISSION'] = $_POST['permission'] ? $_POST['permission'] : 'N';
 
     if (empty($params[':NAME']) || empty($params[':PHONE']) || empty($params[':EMAIL']) || empty($params[':PASSWORD'])) {
@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: /todo");
         exit;
     } else{
-        AccessControl\AccessControl::checkDirectAccess('E-mail já cadastrado!', 'Tente fazer o Login!', true);
+        header("Location: /");
+        exit;
     }
 }
 
@@ -47,7 +48,7 @@ function CheckEmail($email){
 function InsertUser($params) {
     $sql = Queries::INSERT_USER;
     $newUser = DatabaseHelper::executeQuery($sql, $params);
-    $_SESSION['USER_ID'] = $newUser->lastInsertId();
+    $_SESSION['USER_ID'] = DatabaseHelper::getConnection()->lastInsertId();
 }
 
 ?>

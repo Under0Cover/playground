@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user = CheckUser($params[':EMAIL']);
 
-
     if(!$user){
-        AccessControl\AccessControl::checkDirectAccess('Usuário não encontrado', null, true);
+        header("Location: /");
+        exit;
     }else{
         if(password_verify($params[':PASSWORD'], $user['PASSWORD'])){
             $_SESSION['LOGIN'] = true;

@@ -5,6 +5,7 @@ namespace AccessControl;
 session_start();
 
 class AccessControl {
+
     public static function checkDirectAccess($message = 'Página não encontrada!', $optional = null, $error = false) {
         $content = '
                 <!DOCTYPE html>
@@ -42,9 +43,18 @@ class AccessControl {
                 '/todo'
             ];
 
+            $adminPaths = [
+                '/admin.php'
+            ];
+    
             $currentPath = $_SERVER['REQUEST_URI'];        
-
-            if (in_array($currentPath, $allowedPaths)) {
+    
+            if ($_SESSION['PERMISSION'] == 'S') {
+                if (in_array($currentPath, $loggedPaths)) {
+                    header('Location: /admin');
+                    exit;
+                }
+            } else if(in_array($currentPath, $allowedPaths)) {
                 return;
             } else if (in_array($currentPath, $loggedPaths) && ($_SESSION['LOGIN'])) {
                 return;
@@ -53,6 +63,13 @@ class AccessControl {
                 header('Refresh: 3; url=/');
                 exit();
             }
+        }
+    }
+
+    public static function checkAdminAccess() {
+        if ($_SESSION['PERMISSION'] !== 'S') {
+            header("Location: /");
+            exit;
         }
     }
 }

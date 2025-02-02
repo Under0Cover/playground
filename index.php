@@ -20,7 +20,9 @@ switch ($request) {
         require __DIR__ . '/backend/views/todo.php';
         break;
 
-        
+    case '/admin':
+        require __DIR__ . '/backend/views/admin.php';
+        break;
 
     default:
         http_response_code(404);

@@ -20,13 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'&& isset($_POST['task_name'], $_POST['t
         $params['TASK_DESCRIPTION'] = $_POST['task_description'];
         
         $id = InsertTask($params);
-
-        $task = [
-            'ID' => $id,
-            'TASK_NAME' => $params['TASK_NAME'],
-            'TASK_DESCRIPTION' => $params['TASK_DESCRIPTION'],
-            'STATUS' => 'P'
-        ];
     
         header("Location: /todo");
         exit;

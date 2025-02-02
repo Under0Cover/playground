@@ -15,10 +15,10 @@ AccessControl\AccessControl::checkDirectAccess();
 if (!isset($_SESSION['USER_ID'])) {
     header("Location: /");
     exit;
-} else if(!isset($_SESSION['PERMISSION']) || $_SESSION['PERMISSION'] === 'S') {
-    header("Location: /");
+} else if($_SESSION['PERMISSION'] === 'S') {
+    header("Location: /admin");
     exit;
-}else if(true){//($_SERVER['REQUEST_METHOD'] === 'POST') {
+}else if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $params[':USER_ID'] = $_SESSION['USER_ID'];
 
     $tasks = GetTasks($params);
