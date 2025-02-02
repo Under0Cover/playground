@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function CheckUser($email){
     $sql = Queries::CHECK_USER;
-    $field = ':EMAIL';
-    $stmt = DatabaseHelper::executeQuery($sql, $email, $field);
+    $params = [':EMAIL' => $email];
+    $stmt = DatabaseHelper::executeQuery($sql, $params);
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }

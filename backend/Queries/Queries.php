@@ -4,7 +4,7 @@ namespace Queries;
 
 class Queries {
     const CHECK_EMAIL = "
-        SELECT COUNT(*)
+        SELECT *
         FROM USERS
         WHERE EMAIL = :EMAIL;
     ";
@@ -21,8 +21,8 @@ class Queries {
     ";
 
     const INSERT_TASK = "
-        INSERT INTO TODOS (USER_ID, TASK_NAME, TASK_DESCRIPTION) 
-        VALUES (:USER_ID, :TASK_NAME, :TASK_DESCRIPTION);
+        INSERT INTO TODOS (USER_ID, TASK_NAME, TASK_DESCRIPTION, ACTIVE)
+        VALUES (:USER_ID, :TASK_NAME, :TASK_DESCRIPTION, :ACTIVE);
     ";
 
     const GET_TASKS = "

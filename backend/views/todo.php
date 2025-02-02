@@ -11,7 +11,6 @@ use Queries\Queries;
 use Database\DatabaseHelper;
 
 AccessControl\AccessControl::checkDirectAccess();
-var_dump($_SESSION);die;
 
 if (!isset($_SESSION['USER_ID'])) {
     header("Location: /");
@@ -19,7 +18,7 @@ if (!isset($_SESSION['USER_ID'])) {
 } else if($_SESSION['PERMISSION'] === 'S') {
     header("Location: /admin");
     exit;
-}else if($_SERVER['REQUEST_METHOD'] === 'POST') {
+}else if(($_SERVER['REQUEST_METHOD'] === 'GET') && $_SESSION['LOGIN']  && $_SESSION['USER_ID']) {
     $params[':USER_ID'] = $_SESSION['USER_ID'];
 
     $tasks = GetTasks($params);

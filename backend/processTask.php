@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'&& isset($_POST['task_name'], $_POST['t
         $params['USER_ID'] = $_SESSION['USER_ID'];
         $params['TASK_NAME'] = $_POST['task_name'];
         $params['TASK_DESCRIPTION'] = $_POST['task_description'];
+        $params['ACTIVE'] = 'S';
         
         $id = InsertTask($params);
     
