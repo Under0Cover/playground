@@ -28,7 +28,8 @@ class Queries {
     const GET_TASKS = "
         SELECT *
         FROM TODOS
-        WHERE USER_ID = :USER_ID;
+        WHERE USER_ID = :USER_ID
+        AND ACTIVE = 'S';
     ";
 
     const UPDATE_TASK_STATUS = "
@@ -43,7 +44,27 @@ class Queries {
     const GET_TASKS_FOR_ALL = "
         SELECT *
         FROM TODOS
-        WHERE USER_ID = :USER_ID;
+        WHERE USER_ID = :USER_ID
+        AND ACTIVE = 'S';
+    ";
+
+    const UPDATE_TASK = "
+        UPDATE TODOS 
+        SET TASK_NAME = :TASK_NAME,
+            TASK_DESCRIPTION = :TASK_DESCRIPTION,
+            STATUS = :STATUS,
+            COMPLETED_AT = :COMPLETED_AT
+        WHERE ID = :ID
+    ";
+
+    const DELETE_TASK = "
+        UPDATE TODOS
+        SET TASK_NAME = :TASK_NAME,
+            TASK_DESCRIPTION = :TASK_DESCRIPTION,
+            STATUS = :STATUS,
+            COMPLETED_AT = :COMPLETED_AT,
+            ACTIVE = 'N'
+        WHERE ID = :ID
     ";
 }
 

@@ -79,32 +79,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const taskCreatedDate = currentTask.getAttribute('data-task-created');
             const taskCompletionDate = currentTask.getAttribute('data-task-completion') || 'Em execução';
 
+            document.getElementById('task_id').value = taskId;
             document.getElementById('taskTitle').value = taskName;
             document.getElementById('taskDescription').value = taskDescription;
             document.getElementById('taskStatus').value = taskStatus;
             document.getElementById('taskCreatedDate').value = taskCreatedDate;
             document.getElementById('taskCompletionDate').value = taskCompletionDate;
         }
-    });
-
-    // save buton event
-    document.getElementById('saveTask').addEventListener('click', function() {
-        if (currentTask) {
-            console.log('Tarefa salva:', currentTask);
-        } else {
-            console.log('Nenhuma tarefa selecionada');
-        }
-        closeModal();
-    });
-
-    // remove buton event
-    document.getElementById('deleteTask').addEventListener('click', function() {
-        if (currentTask) {
-            console.log('Tarefa excluída:', currentTask);
-        } else {
-            console.log('Nenhuma tarefa selecionada');
-        }
-        closeModal();
     });
 
     // close any modal

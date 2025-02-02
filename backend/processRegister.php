@@ -10,7 +10,6 @@ use Database\DatabaseHelper;
 
 AccessControl\AccessControl::checkDirectAccess();
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $params[':NAME'] = trim($_POST['name']);
     $params[':PHONE'] = trim($_POST['phone']);

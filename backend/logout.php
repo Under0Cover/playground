@@ -7,5 +7,5 @@ unset($_SESSION['PERMISSION']);
 
 session_destroy();
 
-echo json_encode(['success' => true]);
+header('Location: /');
 exit;

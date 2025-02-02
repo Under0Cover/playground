@@ -49,6 +49,7 @@ function getTasks(&$users){
 <body>
     
 <div class="container mt-5">
+    <a href="/backend/logout.php" class="btn btn-danger position-fixed top-0 end-0 m-3">SAIR</a>
     <h2>Usuários Cadastrados</h2>
     <ul class="list-group" id="userList">
         <?php if (isset($users) && is_array($users)): ?>
@@ -103,32 +104,41 @@ function getTasks(&$users){
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editTaskForm">
+                <form id="editTaskForm" action="/backend/processAdmin.php" method="POST">
+
+                    <input type="hidden" id="task_id" name="ID">
+
                     <div class="mb-3">
                         <label for="taskTitle" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="taskTitle">
+                        <input type="text" class="form-control" id="taskTitle" name="TASK_NAME">
                     </div>
+
                     <div class="mb-3">
                         <label for="taskDescription" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="taskDescription" rows="3"></textarea>
+                        <textarea class="form-control" id="taskDescription" rows="3" name="TASK_DESCRIPTION"></textarea>
                     </div>
+
                     <div class="mb-3">
                         <label for="taskStatus" class="form-label">Status</label>
-                        <select class="form-select" id="taskStatus">
+                        <select class="form-select" id="taskStatus" name="STATUS">
                             <option value="P">Pendente</option>
                             <option value="C">Concluída</option>
                         </select>
                     </div>
+
                     <div class="mb-3">
                         <label for="taskCreatedDate" class="form-label">Data de Criação</label>
-                        <input type="text" class="form-control" id="taskCreatedDate" disabled>
+                        <input type="text" class="form-control" id="taskCreatedDate" name="CREATE_AT" disabled>
                     </div>
+
                     <div class="mb-3">
                         <label for="taskCompletionDate" class="form-label">Data de Conclusão</label>
-                        <input type="text" class="form-control" id="taskCompletionDate" disabled>
+                        <input type="text" class="form-control" id="taskCompletionDate" name="COMPLETED_AT" disabled>
                     </div>
-                    <button type="button" class="btn btn-primary" id="saveTask">Salvar</button>
-                    <button type="button" class="btn btn-danger" id="deleteTask">Excluir</button>
+
+                    <input type="hidden" name="ACTION" value="save">
+                    <button type="submit" class="btn btn-primary" id="saveTask" name="ACTION" value="SAVE">Salvar</button>
+                    <button type="submit" class="btn btn-danger" id="deleteTask" name="ACTION" value="DELETE">Excluir</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </form>
             </div>
@@ -136,7 +146,7 @@ function getTasks(&$users){
     </div>
 </div>
 
-<!-- Estrutura oculta para armazenar tarefas de cada usuário -->
+<!-- users tasks -->
 <?php foreach ($users as $user): ?>
     <div class="user-tasks d-none" data-user-id="<?= $user['ID'] ?>">
         <?php foreach ($user['TASKS'] as $task): ?>

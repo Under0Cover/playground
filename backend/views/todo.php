@@ -11,6 +11,7 @@ use Queries\Queries;
 use Database\DatabaseHelper;
 
 AccessControl\AccessControl::checkDirectAccess();
+var_dump($_SESSION);die;
 
 if (!isset($_SESSION['USER_ID'])) {
     header("Location: /");
@@ -47,6 +48,7 @@ function GetTasks($params){
     <link rel="stylesheet" href="/mobile/assets/css/style.css">
 </head>
 <body>
+    <a href="/backend/logout.php" class="btn btn-danger position-fixed top-0 end-0 m-3">SAIR</a>
     <div class="container">
         <div class="todo-container">
             <div class="todo-form">
